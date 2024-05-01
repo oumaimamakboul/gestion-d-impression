@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Choix de la matière</title>
+</head>
+<body>
+    <h2>Choisissez la matière :</h2>
+    <form action="TraitementServlet" method="post">
+        <select name="matiere">
+            <option value="mathematiques">Mathématiques</option>
+            <option value="physique">Physique</option>
+            <option value="chimie">Chimie</option>
+            <!-- Ajoutez d'autres options selon vos besoins -->
+        </select>
+        <br><br>
+        <input type="submit" value="Valider">
+    </form>
+</body>
+</html>

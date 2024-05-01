@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choix de la matière</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css"> <!-- Assurez-vous d'ajouter le bon chemin pour votre fichier CSS -->
+</head>
+<body>
+    <div class="container">
+        <h2>Choisissez la matière :</h2>
+        <div class="matiere-list">
+            <a href="TraitementServlet?matiere=mathematiques" class="matiere-item">
+                <i class="fas fa-square"></i> Mathématiques
+            </a>
+            <a href="TraitementServlet?matiere=physique" class="matiere-item">
+                <i class="fas fa-square"></i> Physique
+            </a>
+            <a href="TraitementServlet?matiere=chimie" class="matiere-item">
+                <i class="fas fa-square"></i> Chimie
+            </a>
+            <!-- Ajoutez d'autres matières avec les liens correspondants -->
+        </div>
+    </div>
+</body>
+</html>

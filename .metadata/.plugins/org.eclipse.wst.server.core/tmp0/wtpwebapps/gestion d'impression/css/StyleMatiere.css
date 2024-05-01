@@ -1,0 +1,19 @@
+@charset "ISO-8859-1";
+/* style.css */
+
+/* Style pour les liens */
+a {
+    display: block; /* Afficher les liens comme des blocs */
+    text-decoration: none; /* Supprimer le soulignement par défaut */
+    color: #333; /* Couleur du texte */
+    padding: 10px; /* Espace intérieur autour du texte */
+    margin-bottom: 5px; /* Marge en bas de chaque lien */
+    background-color: #f2f2f2; /* Couleur de fond */
+    border-radius: 5px; /* Coins arrondis */
+    transition: background-color 0.3s; /* Animation de transition */
+}
+
+/* Style pour les liens au survol */
+a:hover {
+    background-color: #ddd; /* Changement de couleur de fond au survol */
+}

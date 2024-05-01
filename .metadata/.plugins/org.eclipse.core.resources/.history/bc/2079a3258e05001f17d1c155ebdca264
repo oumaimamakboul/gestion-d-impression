@@ -1,0 +1,73 @@
+import java.sql.*;
+
+public class Main {
+    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    static final String DB_URL = "jdbc:mysql://localhost/ma_base_de_donnees";
+
+    // Informations de connexion à la base de données
+    static final String USER = "utilisateur";
+    static final String PASS = "mot_de_passe";
+
+    public static void main(String[] args) {
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            // Enregistrement du driver JDBC
+            Class.forName(JDBC_DRIVER);
+
+            // Connexion à la base de données
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            // Création de la table si elle n'existe pas
+            stmt = conn.createStatement();
+            String sql = "CREATE TABLE IF NOT EXISTS Utilisateurs " +
+                         "(id INTEGER NOT NULL AUTO_INCREMENT, " +
+                         " username VARCHAR(255), " +
+                         " password VARCHAR(255), " +
+                         " PRIMARY KEY ( id ))";
+            stmt.executeUpdate(sql);
+
+            // Exemple d'enregistrement d'un utilisateur
+            String username = "utilisateur_test";
+            String password = "mot_de_passe_test";
+            sql = "INSERT INTO Utilisateurs (username, password) VALUES ('" + username + "', '" + password + "')";
+            stmt.executeUpdate(sql);
+
+            // Exemple de login
+            String loginUsername = "utilisateur_test";
+            String loginPassword = "mot_de_passe_test";
+            sql = "SELECT * FROM Utilisateurs WHERE username='" + loginUsername + "' AND password='" + loginPassword + "'";
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                System.out.println("Login réussi !");
+            } else {
+                System.out.println("Login échoué. Vérifiez vos informations de connexion.");
+            }
+            rs.close();
+
+            // Exemple de logout (rien à faire en Java, juste déconnexion de la base de données si nécessaire)
+
+            // Fermeture des ressources
+            stmt.close();
+            conn.close();
+        } catch (SQLException se) {
+            // Gestion des erreurs SQL
+            se.printStackTrace();
+        } catch (Exception e) {
+            // Gestion des autres erreurs
+            e.printStackTrace();
+        } finally {
+            // Bloc finally utilisé pour fermer les ressources
+            try {
+                if (stmt != null) stmt.close();
+            } catch (SQLException se2) {
+            } // rien à faire
+            try {
+                if (conn != null) conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        System.out.println("Fin de l'exécution.");
+    }
+}

@@ -1,0 +1,57 @@
+package com.uniquedeveloper.registration;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/register")
+public class RegistrationServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    
+    // Définir les informations de connexion à la base de données
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3307/company";
+    private static final String JDBC_USER = "root";
+    private static final String JDBC_PASSWORD = "123456";
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Récupérer les données du formulaire
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String mobile = request.getParameter("mobile");
+
+        // Établir la connexion à la base de données
+        try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
+            // Préparer la requête SQL pour insérer un nouvel utilisateur dans la table users
+            String sql = "INSERT INTO users (uname, upwd, uemail, umobile) VALUES (?, ?, ?, ?)";
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, username);
+                stmt.setString(2, password);
+                stmt.setString(3, email);
+                stmt.setString(4, mobile);
+
+                // Exécuter la requête d'insertion
+                int rowsInserted = stmt.executeUpdate();
+                if (rowsInserted > 0) {
+                    // Rediriger vers une page de succès si l'inscription réussit
+                    response.sendRedirect("login.jsp");
+                    return;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Gérer l'erreur de connexion ou d'exécution de la requête SQL
+        }
+
+        // Rediriger vers une page d'échec si l'inscription échoue
+        response.sendRedirect("registration.jsp");
+    }
+}

@@ -1,0 +1,35 @@
+package com.uniquedeveloper.registration;
+
+import java.io.IOException;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/register")
+public class RegistrationServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Récupérer les données du formulaire
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        // Utiliser une classe DAO pour enregistrer l'utilisateur dans la base de données
+        UserDao userDao = new UserDao(); // Vous devez implémenter UserDao
+
+        // Enregistrer l'utilisateur dans la base de données
+        boolean success = userDao.registerUser(username, email, password);
+
+        if (success) {
+            // Rediriger vers une page de succès si l'inscription réussit
+            response.sendRedirect("registration-success.jsp");
+        } else {
+            // Rediriger vers une page d'échec si l'inscription échoue
+            response.sendRedirect("registration-failure.jsp");
+        }
+    }
+}

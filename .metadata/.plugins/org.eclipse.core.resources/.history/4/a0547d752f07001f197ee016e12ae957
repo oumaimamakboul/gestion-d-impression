@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Choix des Matières</title>
+    <!-- Insérer ici les liens vers vos fichiers CSS -->
+    <link rel="stylesheet" href="css/StyleMatiere.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Choisissez une Matière</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Libellé de la Matière</th>
+                    <th>Selectionner</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Mathématiques</td>
+                    <td><input type="checkbox" name="matiere" value="Mathématiques"></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Français</td>
+                    <td><input type="checkbox" name="matiere" value="Français"></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Histoire</td>
+                    <td><input type="checkbox" name="matiere" value="Histoire"></td>
+                </tr>
+                <!-- Ajoutez d'autres lignes pour d'autres matières -->
+            </tbody>
+        </table>
+        <button type="button">Valider</button>
+    </div>
+    <!-- Insérer ici les liens vers vos fichiers JavaScript -->
+    <script src="scripts.js"></script>
+</body>
+</html>
